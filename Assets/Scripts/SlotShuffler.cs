@@ -76,6 +76,14 @@ namespace LavaUmaMao {
             }
         }
 
+        private int SelectNewIndex(int index) {
+            int randomResult = UnityRandom.Range(0, stepNumber - 1 - index);
+            int selectedIndex = shuffleNumbers[randomResult];
+            shuffleNumbers[randomResult] = shuffleNumbers[stepNumber - 1 - index];
+            shuffleNumbers[stepNumber - 1 - index] = selectedIndex;
+            return selectedIndex;
+        }
+
         private void UpdateTestButtonStatus(int newValue) {
             testResultButton.interactable = newValue >= stepNumber;
         }
@@ -103,14 +111,6 @@ namespace LavaUmaMao {
                 selectionSlots[index].ResetInitialWashingStep(washingSteps[index]);
                 placementSlots[index].ResetSlot();
             }
-        }
-
-        private int SelectNewIndex(int index) {
-            int randomResult = UnityRandom.Range(0, stepNumber - 1 - index);
-            int selectedIndex = shuffleNumbers[randomResult];
-            shuffleNumbers[randomResult] = shuffleNumbers[stepNumber - 1 - index];
-            shuffleNumbers[stepNumber - 1 - index] = selectedIndex;
-            return selectedIndex;
         }
 
         private void ResetIndexArray() {

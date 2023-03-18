@@ -7,7 +7,7 @@ namespace LavaUmaMAo {
     public static class WebGLBuilder {
         public static void Build() {
             string[] arguments = Environment.GetCommandLineArgs();
-            int index = System.Array.IndexOf(arguments, "LavaUmaMao.WebGLBuilder.Build");
+            int index = Array.IndexOf(arguments, "LavaUmaMao.WebGLBuilder.Build");
             if (index < 0 || index >= arguments.Length - 1) {
                 throw new ArgumentException("[WebGLBuilder] Could not determine destination path!");
             }

@@ -35,7 +35,7 @@ namespace LavaUmaMao {
             if (WashingStep != null)
                 WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
             WashingStep = newStep;
-            slotImage.color = newStep != null ? UnityEngine.Color.white : UnityEngine.Color.clear;
+            slotImage.color = newStep != null ? Color.white : Color.clear;
         }
 
         protected override void WashingStepStateChanged(WashingStepState newState) {
