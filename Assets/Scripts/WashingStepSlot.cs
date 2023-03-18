@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace LavaUmaMao {
     public abstract class WashingStepSlot : UIBehaviour {
-        [SerializeField] protected Outline slotOutline = null;
+        [SerializeField] protected UIBehaviour slotOutline = null;
         [SerializeField] protected Image slotImage = null;
         [SerializeField] protected WashingStepVariable draggedWashingStepReference = null;
         public abstract WashingStep WashingStep { get; protected set; }
@@ -22,7 +22,7 @@ namespace LavaUmaMao {
         }
 
         public virtual void OnPointerExit() {
-            slotOutline.enabled = true;
+            slotOutline.enabled = false;
         }
 
         public abstract void OnPointerDown();

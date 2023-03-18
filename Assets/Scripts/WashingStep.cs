@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace LavaUmaMao {
     [CreateAssetMenu(menuName = "LavaUmaMão/WashingStep", fileName = "WashingStep")]
     public class WashingStep : ScriptableObject {
-        [SerializeField, Range(0, 10)] private int stepId = 0;
+        [SerializeField, Range(0, 6)] private int stepId = 0;
         public int StepId => stepId;
         [SerializeField] private string animationTriggerName = string.Empty;
         public string AnimationTriggerName => animationTriggerName;
