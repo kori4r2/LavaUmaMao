@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotOutline: {fileID: 7601735906630621696}
   slotImage: {fileID: 3677013605857568524}
+  overlay: {fileID: 8820941539450858461}
+  correctIndicator: {fileID: 3530803025950787404}
+  wrongIndicator: {fileID: 4179492488055747875}
   draggedWashingStepReference: {fileID: 11400000, guid: 6cc150d83deca8f65a0ac82b7f444b2f, type: 2}
 --- !u!1001 &5645918023762731918
 PrefabInstance:
@@ -234,7 +237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5645918023762731918}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -255,3 +258,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8820941539450858461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3760526713762531411, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 5645918023762731918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3530803025950787404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9125904876620063938, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 5645918023762731918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4179492488055747875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8384258578401433261, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 5645918023762731918}
+  m_PrefabAsset: {fileID: 0}

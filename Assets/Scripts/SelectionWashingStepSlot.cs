@@ -7,17 +7,27 @@ namespace LavaUmaMao {
         }
 
         protected override void WashingStepStateChanged(WashingStepState newState) {
-            // Change Object based on current state
             switch (newState) {
                 case WashingStepState.Available:
+                case WashingStepState.Dragging:
+                    HideOverlay();
+                    HideWrongIndicator();
+                    HideCorrectIndicator();
                     break;
                 case WashingStepState.Selected:
-                    break;
-                case WashingStepState.Dragging:
+                    ShowOverlay();
+                    HideWrongIndicator();
+                    HideCorrectIndicator();
                     break;
                 case WashingStepState.Correct:
+                    ShowOverlay();
+                    HideWrongIndicator();
+                    ShowCorrectIndicator();
                     break;
                 case WashingStepState.Wrong:
+                    ShowOverlay();
+                    ShowWrongIndicator();
+                    HideCorrectIndicator();
                     break;
             }
         }
@@ -34,6 +44,7 @@ namespace LavaUmaMao {
                 WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
 
             startingWashingStep = newInitialStep;
+            startingWashingStep.CurrentState = WashingStepState.Available;
             WashingStep.AddStateChangeListener(WashingStepStateChanged);
             if (slotImage.sprite != WashingStep.StepSprite)
                 slotImage.sprite = WashingStep.StepSprite;
@@ -41,15 +52,17 @@ namespace LavaUmaMao {
         }
 
         public override void OnPointerDown() {
+            if (WashingStep.CurrentState != WashingStepState.Available)
+                return;
             draggedWashingStepReference.Value = WashingStep;
             WashingStep.CurrentState = WashingStepState.Dragging;
         }
 
         public override void OnPointerUp() {
-            if (draggedWashingStepReference.Value != WashingStep)
+            if (draggedWashingStepReference.Value != WashingStep || draggedWashingStepReference.Value == null)
                 return;
-            draggedWashingStepReference.Value = null;
             WashingStep.CurrentState = WashingStepState.Available;
+            draggedWashingStepReference.Value = null;
         }
     }
 }

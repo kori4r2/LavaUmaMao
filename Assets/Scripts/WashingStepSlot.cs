@@ -6,6 +6,9 @@ namespace LavaUmaMao {
     public abstract class WashingStepSlot : UIBehaviour {
         [SerializeField] protected UIBehaviour slotOutline = null;
         [SerializeField] protected Image slotImage = null;
+        [SerializeField] protected GameObject overlay = null;
+        [SerializeField] protected GameObject correctIndicator = null;
+        [SerializeField] protected GameObject wrongIndicator = null;
         [SerializeField] protected WashingStepVariable draggedWashingStepReference = null;
         public abstract WashingStep WashingStep { get; protected set; }
 
@@ -28,5 +31,29 @@ namespace LavaUmaMao {
         public abstract void OnPointerDown();
 
         public abstract void OnPointerUp();
+
+        protected void ShowOverlay() {
+            overlay.SetActive(true);
+        }
+
+        protected void HideOverlay() {
+            overlay.SetActive(false);
+        }
+
+        protected void ShowCorrectIndicator() {
+            correctIndicator.SetActive(true);
+        }
+
+        protected void HideCorrectIndicator() {
+            correctIndicator.SetActive(false);
+        }
+
+        protected void ShowWrongIndicator() {
+            wrongIndicator.SetActive(true);
+        }
+
+        protected void HideWrongIndicator() {
+            wrongIndicator.SetActive(false);
+        }
     }
 }
