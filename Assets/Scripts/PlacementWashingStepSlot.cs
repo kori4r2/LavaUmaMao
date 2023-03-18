@@ -27,6 +27,9 @@ namespace LavaUmaMao {
 
         public void ResetSlot() {
             ChangeCurrentWashingStep(null);
+            HideOverlay();
+            HideWrongIndicator();
+            HideCorrectIndicator();
         }
 
         private void ChangeCurrentWashingStep(WashingStep newStep) {
@@ -34,6 +37,8 @@ namespace LavaUmaMao {
                 return;
             if (WashingStep != null)
                 WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
+            if (newStep != null)
+                newStep.AddStateChangeListener(WashingStepStateChanged);
             WashingStep = newStep;
             slotImage.color = newStep != null ? Color.white : Color.clear;
         }

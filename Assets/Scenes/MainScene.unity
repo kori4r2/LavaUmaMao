@@ -895,7 +895,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1275107549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1457578245}
+        m_TargetAssemblyTypeName: LavaUmaMao.GameSessionController, LavaUmaMao
+        m_MethodName: TestResults
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1275107549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,30 +1075,31 @@ MonoBehaviour:
   playFullAnimationEvent: {fileID: 11400000, guid: 51516848d6a5c8532b6b4c6607a4621d, type: 2}
   animationEndedEvent: {fileID: 11400000, guid: a8eff6c99e4ac32f2a63bb8aac8604af, type: 2}
   testResultButton: {fileID: 1275107548}
-  selectionSlots:
-  - {fileID: 120391961}
-  - {fileID: 1096395666}
-  - {fileID: 1096395665}
-  - {fileID: 1096395664}
-  - {fileID: 1096395663}
-  - {fileID: 1096395662}
-  - {fileID: 1096395661}
-  placementSlots:
-  - {fileID: 715052897}
-  - {fileID: 1257857960772392368}
-  - {fileID: 1257857960772392367}
-  - {fileID: 1257857960772392366}
-  - {fileID: 1257857960772392365}
-  - {fileID: 1257857960772392364}
-  - {fileID: 1257857960772392363}
-  washingSteps:
-  - {fileID: 11400000, guid: 4b7253d5ca339f9db901dff50ead68a2, type: 2}
-  - {fileID: 11400000, guid: a001c80bc16f2b56c92b578216ca14ae, type: 2}
-  - {fileID: 11400000, guid: 36842b020858863ef8d186320f14498f, type: 2}
-  - {fileID: 11400000, guid: e6e6360ede12765d49363d68b71662bf, type: 2}
-  - {fileID: 11400000, guid: c3ad7ff591aaa3461a23ca92a02a8c34, type: 2}
-  - {fileID: 11400000, guid: d9189f1c88ec21839a9c5dba773c2f75, type: 2}
-  - {fileID: 11400000, guid: 9562c98c6008e2159b14bc3f8aaaf424, type: 2}
+  slotShuffler:
+    selectionSlots:
+    - {fileID: 120391961}
+    - {fileID: 1096395666}
+    - {fileID: 1096395665}
+    - {fileID: 1096395664}
+    - {fileID: 1096395663}
+    - {fileID: 1096395662}
+    - {fileID: 1096395661}
+    placementSlots:
+    - {fileID: 715052897}
+    - {fileID: 1257857960772392368}
+    - {fileID: 1257857960772392367}
+    - {fileID: 1257857960772392366}
+    - {fileID: 1257857960772392365}
+    - {fileID: 1257857960772392364}
+    - {fileID: 1257857960772392363}
+    washingSteps:
+    - {fileID: 11400000, guid: 4b7253d5ca339f9db901dff50ead68a2, type: 2}
+    - {fileID: 11400000, guid: a001c80bc16f2b56c92b578216ca14ae, type: 2}
+    - {fileID: 11400000, guid: 36842b020858863ef8d186320f14498f, type: 2}
+    - {fileID: 11400000, guid: e6e6360ede12765d49363d68b71662bf, type: 2}
+    - {fileID: 11400000, guid: c3ad7ff591aaa3461a23ca92a02a8c34, type: 2}
+    - {fileID: 11400000, guid: d9189f1c88ec21839a9c5dba773c2f75, type: 2}
+    - {fileID: 11400000, guid: 9562c98c6008e2159b14bc3f8aaaf424, type: 2}
 --- !u!4 &1457578246
 Transform:
   m_ObjectHideFlags: 0

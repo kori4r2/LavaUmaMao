@@ -6,23 +6,24 @@ using Toblerone.Toolbox;
 using System.Collections;
 
 namespace LavaUmaMao {
-    public class SlotShuffler : MonoBehaviour {
+    [Serializable]
+    public class SlotShuffler {
         private const int stepNumber = 7;
-        [SerializeField] private BoolVariable blockInput;
-        [SerializeField] private IntVariable placedStepsCount;
-        private VariableObserver<int> placedStepsCountObserver;
-        [SerializeField] private EventSO playFullAnimationEvent;
-        [SerializeField] private EventSO animationEndedEvent;
-        private EventListener animationEndedEventListener;
-        [SerializeField] private Button testResultButton;
         [SerializeField] private SelectionWashingStepSlot[] selectionSlots = new SelectionWashingStepSlot[stepNumber];
         [SerializeField] private PlacementWashingStepSlot[] placementSlots = new PlacementWashingStepSlot[stepNumber];
         [SerializeField] private WashingStep[] washingSteps = new WashingStep[stepNumber];
         private WashingStep[] shuffledSteps = new WashingStep[stepNumber];
         private int[] shuffleNumbers = new int[stepNumber];
-        private WaitForSeconds placeholderDelay;
 
-        private void OnValidate() {
+        public SlotShuffler() {
+            selectionSlots = new SelectionWashingStepSlot[stepNumber];
+            placementSlots = new PlacementWashingStepSlot[stepNumber];
+            washingSteps = new WashingStep[stepNumber];
+            shuffledSteps = new WashingStep[stepNumber];
+            shuffleNumbers = new int[stepNumber];
+        }
+
+        public void ValidateArrays() {
             if (selectionSlots.Length != stepNumber)
                 AdjustSelectionSlotsArraySize();
             if (placementSlots.Length != stepNumber)
@@ -52,20 +53,12 @@ namespace LavaUmaMao {
             Array.Copy(copy, 0, washingSteps, 0, Math.Min(copy.Length, stepNumber));
         }
 
-        private void Awake() {
-            animationEndedEventListener = new EventListener(animationEndedEvent, ResetGame);
-            placedStepsCountObserver = new VariableObserver<int>(placedStepsCount, UpdateTestButtonStatus);
-            placeholderDelay = new WaitForSeconds(2f);
-        }
-
-        private void ResetGame() {
-            placedStepsCount.Value = 0;
+        public void ResetGame() {
             ShuffleStepOrder();
             for (int index = 0; index < stepNumber; index++) {
                 selectionSlots[index].ResetInitialWashingStep(shuffledSteps[index]);
                 placementSlots[index].ResetSlot();
             }
-            blockInput.Value = false;
         }
 
         private void ShuffleStepOrder() {
@@ -73,6 +66,12 @@ namespace LavaUmaMao {
             for (int index = 0; index < stepNumber; index++) {
                 int selectedIndex = SelectNewIndex(index);
                 shuffledSteps[index] = washingSteps[selectedIndex];
+            }
+        }
+
+        private void ResetIndexArray() {
+            for (int index = 0; index < stepNumber; index++) {
+                shuffleNumbers[index] = index;
             }
         }
 
@@ -84,51 +83,34 @@ namespace LavaUmaMao {
             return selectedIndex;
         }
 
-        private void UpdateTestButtonStatus(int newValue) {
-            testResultButton.interactable = newValue >= stepNumber;
-        }
-
-        private void OnEnable() {
-            animationEndedEventListener.StartListeningEvent();
-            placedStepsCountObserver.StartWatching();
-        }
-
-        private void OnDisable() {
-            animationEndedEventListener.StopListeningEvent();
-            placedStepsCountObserver.StopWatching();
-        }
-
-        private void Start() {
-            blockInput.Value = true;
-            placedStepsCount.Value = 0;
-            InitSlots();
-            playFullAnimationEvent.Raise();
-            PlaceholderPlayFullAnimation();
-        }
-
-        private void InitSlots() {
+        public void InitSlots() {
             for (int index = 0; index < stepNumber; index++) {
                 selectionSlots[index].ResetInitialWashingStep(washingSteps[index]);
                 placementSlots[index].ResetSlot();
             }
         }
 
-        private void ResetIndexArray() {
+        public bool TestResults() {
+            bool result = true;
             for (int index = 0; index < stepNumber; index++) {
-                shuffleNumbers[index] = index;
+                WashingStep placedStep = placementSlots[index].WashingStep;
+                bool indexStepCorrect = placedStep != null && placedStep.StepId == index;
+                placedStep.CurrentState = indexStepCorrect ? WashingStepState.Correct : WashingStepState.Wrong;
+                result &= indexStepCorrect;
             }
+            return result;
         }
 
-        private void PlaceholderPlayFullAnimation() {
-            StartCoroutine(PlacedholderAnimationCoroutine());
-        }
-
-        private IEnumerator PlacedholderAnimationCoroutine() {
-            yield return placeholderDelay;
-            animationEndedEvent.Raise();
-        }
-
-        public void TestResults() {
+        public int ResetWrongSlots() {
+            int count = 0;
+            for (int index = 0; index < stepNumber; index++) {
+                WashingStep placedStep = placementSlots[index].WashingStep;
+                if (placedStep.CurrentState == WashingStepState.Wrong) {
+                    count++;
+                    placedStep.CurrentState = WashingStepState.Available;
+                }
+            }
+            return count;
         }
     }
 }
