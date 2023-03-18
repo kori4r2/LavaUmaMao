@@ -9,6 +9,8 @@ namespace LavaUmaMao {
     public class SlotShuffler : MonoBehaviour {
         private const int stepNumber = 7;
         [SerializeField] private BoolVariable blockInput;
+        [SerializeField] private IntVariable placedStepsCount;
+        private VariableObserver<int> placedStepsCountObserver;
         [SerializeField] private EventSO playFullAnimationEvent;
         [SerializeField] private EventSO animationEndedEvent;
         private EventListener animationEndedEventListener;
@@ -52,11 +54,12 @@ namespace LavaUmaMao {
 
         private void Awake() {
             animationEndedEventListener = new EventListener(animationEndedEvent, ResetGame);
+            placedStepsCountObserver = new VariableObserver<int>(placedStepsCount, UpdateTestButtonStatus);
             placeholderDelay = new WaitForSeconds(2f);
         }
 
         private void ResetGame() {
-            testResultButton.interactable = false;
+            placedStepsCount.Value = 0;
             ShuffleStepOrder();
             for (int index = 0; index < stepNumber; index++) {
                 selectionSlots[index].ResetInitialWashingStep(shuffledSteps[index]);
@@ -73,19 +76,26 @@ namespace LavaUmaMao {
             }
         }
 
+        private void UpdateTestButtonStatus(int newValue) {
+            testResultButton.interactable = newValue >= stepNumber;
+        }
+
         private void OnEnable() {
             animationEndedEventListener.StartListeningEvent();
+            placedStepsCountObserver.StartWatching();
         }
 
         private void OnDisable() {
             animationEndedEventListener.StopListeningEvent();
+            placedStepsCountObserver.StopWatching();
         }
 
         private void Start() {
-            testResultButton.interactable = false;
             blockInput.Value = true;
+            placedStepsCount.Value = 0;
             InitSlots();
-            PlayFullAnimation();
+            playFullAnimationEvent.Raise();
+            PlaceholderPlayFullAnimation();
         }
 
         private void InitSlots() {
@@ -109,8 +119,7 @@ namespace LavaUmaMao {
             }
         }
 
-        private void PlayFullAnimation() {
-            //Placeholder
+        private void PlaceholderPlayFullAnimation() {
             StartCoroutine(PlacedholderAnimationCoroutine());
         }
 

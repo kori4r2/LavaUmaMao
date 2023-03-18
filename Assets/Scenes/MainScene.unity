@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockInput: {fileID: 11400000, guid: 1106a647d94c0d8db83e2630f960fce9, type: 2}
+  placedStepsCount: {fileID: 11400000, guid: 320696c176a41a3a1b089e5609f15443, type: 2}
   playFullAnimationEvent: {fileID: 11400000, guid: 51516848d6a5c8532b6b4c6607a4621d, type: 2}
   animationEndedEvent: {fileID: 11400000, guid: a8eff6c99e4ac32f2a63bb8aac8604af, type: 2}
   testResultButton: {fileID: 1275107548}

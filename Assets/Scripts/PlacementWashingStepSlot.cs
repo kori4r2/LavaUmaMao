@@ -1,7 +1,9 @@
+using UnityEngine;
 using Toblerone.Toolbox;
 
 namespace LavaUmaMao {
     public class PlacementWashingStepSlot : WashingStepSlot {
+        [SerializeField] private IntVariable placedStepsCount;
         public override WashingStep WashingStep { get; protected set; }
         private VariableObserver<WashingStep> draggedStepObserver;
         private WashingStep newStepSelected = null;
@@ -18,6 +20,7 @@ namespace LavaUmaMao {
                 newStepSelected = null;
                 draggedWashingStepReference.Value = null;
                 WashingStep.CurrentState = WashingStepState.Selected;
+                placedStepsCount.IncrementValue(1);
             }
             newStepSelected = null;
         }
@@ -84,6 +87,7 @@ namespace LavaUmaMao {
             draggedWashingStepReference.Value = WashingStep;
             previousStepSelected = WashingStep;
             ChangeCurrentWashingStep(null);
+            placedStepsCount.DecrementValue(1);
             draggedWashingStepReference.Value.CurrentState = WashingStepState.Dragging;
             newStepSelected = draggedWashingStepReference.Value;
         }
