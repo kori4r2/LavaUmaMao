@@ -40,6 +40,7 @@ namespace LavaUmaMao {
             if (newStep != null)
                 newStep.AddStateChangeListener(WashingStepStateChanged);
             WashingStep = newStep;
+            slotImage.sprite = newStep != null ? newStep.StepSprite : null;
             slotImage.color = newStep != null ? Color.white : Color.clear;
         }
 
