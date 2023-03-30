@@ -1,9 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityRandom = UnityEngine.Random;
-using Toblerone.Toolbox;
-using System.Collections;
 
 namespace LavaUmaMao {
     [Serializable]

@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityRandom = UnityEngine.Random;
 using Toblerone.Toolbox;
 using System.Collections;
 
@@ -16,7 +14,6 @@ namespace LavaUmaMao {
         private EventListener animationEndedEventListener;
         [SerializeField] private Button testResultButton;
         [SerializeField] private SlotShuffler slotShuffler = new SlotShuffler();
-        private WaitForSeconds placeholderDelay;
         private WaitForSeconds wrongAnswerDelay;
 
         private void OnValidate() {
@@ -26,7 +23,6 @@ namespace LavaUmaMao {
         private void Awake() {
             animationEndedEventListener = new EventListener(animationEndedEvent, ResetGame);
             placedStepsCountObserver = new VariableObserver<int>(placedStepsCount, UpdateTestButtonStatus);
-            placeholderDelay = new WaitForSeconds(2f);
             wrongAnswerDelay = new WaitForSeconds(2f);
         }
 
@@ -55,16 +51,6 @@ namespace LavaUmaMao {
             placedStepsCount.Value = 0;
             slotShuffler.InitSlots();
             playFullAnimationEvent.Raise();
-            PlaceholderPlayFullAnimation();
-        }
-
-        private void PlaceholderPlayFullAnimation() {
-            StartCoroutine(PlacedholderAnimationCoroutine());
-        }
-
-        private IEnumerator PlacedholderAnimationCoroutine() {
-            yield return placeholderDelay;
-            animationEndedEvent.Raise();
         }
 
         public void TestResults() {
@@ -72,7 +58,6 @@ namespace LavaUmaMao {
             bool result = slotShuffler.TestResults();
             if (result) {
                 playFullAnimationEvent.Raise();
-                PlaceholderPlayFullAnimation();
             } else {
                 StartCoroutine(WrongAnswerCoroutine());
             }

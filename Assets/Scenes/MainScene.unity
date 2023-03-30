@@ -1074,6 +1074,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1531083271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531083269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c83a9912bbb9c95a32f7416ad12a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1531083270}
+  fullAnimationEventTrigger: PlayFull
+  fullAnimationEvent: {fileID: 11400000, guid: 51516848d6a5c8532b6b4c6607a4621d, type: 2}
+  stepAnimationEvent: {fileID: 11400000, guid: d5fad48ba02541954a89143632334b9b, type: 2}
+  blockInput: {fileID: 11400000, guid: 1106a647d94c0d8db83e2630f960fce9, type: 2}
 --- !u!1001 &1551048720
 PrefabInstance:
   m_ObjectHideFlags: 0
