@@ -63,6 +63,7 @@ namespace LavaUmaMao {
             for (int index = 0; index < stepNumber; index++) {
                 int selectedIndex = SelectNewIndex(index);
                 shuffledSteps[index] = washingSteps[selectedIndex];
+                shuffledSteps[index].CurrentState = WashingStepState.Available;
             }
         }
 
@@ -82,6 +83,7 @@ namespace LavaUmaMao {
 
         public void InitSlots() {
             for (int index = 0; index < stepNumber; index++) {
+                washingSteps[index].CurrentState = WashingStepState.Correct;
                 selectionSlots[index].ResetInitialWashingStep(washingSteps[index]);
                 placementSlots[index].ResetSlot();
             }

@@ -37,15 +37,15 @@ namespace LavaUmaMao {
         }
 
         public void ResetInitialWashingStep(WashingStep newInitialStep) {
-            if (newInitialStep == null || newInitialStep == WashingStep)
+            if (newInitialStep == null)
                 return;
 
-            if (WashingStep != null)
+            if (WashingStep != null && newInitialStep != WashingStep)
                 WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
+            if (newInitialStep != WashingStep)
+                newInitialStep.AddStateChangeListener(WashingStepStateChanged);
 
             startingWashingStep = newInitialStep;
-            startingWashingStep.CurrentState = WashingStepState.Available;
-            WashingStep.AddStateChangeListener(WashingStepStateChanged);
             if (slotImage.sprite != WashingStep.StepSprite)
                 slotImage.sprite = WashingStep.StepSprite;
             WashingStepStateChanged(WashingStep.CurrentState);
