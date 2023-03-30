@@ -35,13 +35,21 @@ namespace LavaUmaMao {
         private void ChangeCurrentWashingStep(WashingStep newStep) {
             if (WashingStep == newStep && newStep != null)
                 return;
-            if (WashingStep != null)
-                WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
+            if (WashingStep != null) {
+                StepReplacementPrecautions(newStep);
+            }
             if (newStep != null)
                 newStep.AddStateChangeListener(WashingStepStateChanged);
             WashingStep = newStep;
             slotImage.sprite = newStep != null ? newStep.StepSprite : null;
             slotImage.color = newStep != null ? Color.white : Color.clear;
+        }
+
+        private void StepReplacementPrecautions(WashingStep newStep) {
+            WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
+            WashingStep.CurrentState = WashingStepState.Available;
+            if (newStep != null)
+                placedStepsCount.DecrementValue(1);
         }
 
         protected override void WashingStepStateChanged(WashingStepState newState) {
