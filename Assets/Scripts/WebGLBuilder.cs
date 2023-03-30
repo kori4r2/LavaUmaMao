@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace LavaUmaMAo {
+namespace LavaUmaMao {
     public static class WebGLBuilder {
         public static void Build() {
             string[] arguments = Environment.GetCommandLineArgs();
