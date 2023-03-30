@@ -15,4 +15,4 @@ MonoBehaviour:
   stepId: 5
   animationTriggerName: Passo6
   playAnimationEvent: {fileID: 11400000, guid: d5fad48ba02541954a89143632334b9b, type: 2}
-  stepImage: {fileID: 21300000, guid: 8371e575a7188eca3b7bff56c8c44dd3, type: 3}
+  stepImage: {fileID: 7874922404813164521, guid: 8371e575a7188eca3b7bff56c8c44dd3, type: 3}

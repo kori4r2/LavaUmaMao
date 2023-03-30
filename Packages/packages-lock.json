@@ -10,6 +10,12 @@
       },
       "hash": "2ba3455637e7de8bd434c32c3dd49bc2630f0da2"
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.animation.rigging": {
       "version": "1.0.3",
       "depth": 0,

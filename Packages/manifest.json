@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.toblerone.toolbox": "https://github.com/kori4r2/TobleroneBox.git#1.4.2",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.0.3",
     "com.unity.collab-proxy": "1.5.7",
     "com.unity.ide.rider": "2.0.7",
