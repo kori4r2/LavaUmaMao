@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6150311e88ed0c96696816ae554af910, type: 3}
   m_Name: WashingStep 4
   m_EditorClassIdentifier: 
-  stepId: 4
-  animationTriggerName: 
+  stepId: 3
+  animationTriggerName: Passo4
   playAnimationEvent: {fileID: 11400000, guid: d5fad48ba02541954a89143632334b9b, type: 2}
   stepImage: {fileID: 21300000, guid: 12e286859f7a416d69948a6ade0c9b9f, type: 3}
