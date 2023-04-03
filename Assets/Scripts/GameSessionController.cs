@@ -9,6 +9,8 @@ namespace LavaUmaMao {
         [SerializeField] private BoolVariable blockInput;
         [SerializeField] private IntVariable placedStepsCount;
         private VariableObserver<int> placedStepsCountObserver;
+        [SerializeField] private WashingStepVariable draggedSlot;
+        [SerializeField] private WashingStepSlotVariable selectedSlot;
         [SerializeField] private EventSO playFullAnimationEvent;
         [SerializeField] private EventSO animationEndedEvent;
         private EventListener animationEndedEventListener;
@@ -24,9 +26,13 @@ namespace LavaUmaMao {
             animationEndedEventListener = new EventListener(animationEndedEvent, ResetGame);
             placedStepsCountObserver = new VariableObserver<int>(placedStepsCount, UpdateTestButtonStatus);
             wrongAnswerDelay = new WaitForSeconds(2f);
+            selectedSlot.Value = null;
+            draggedSlot.Value = null;
         }
 
         private void ResetGame() {
+            selectedSlot.Value = null;
+            draggedSlot.Value = null;
             placedStepsCount.Value = 0;
             slotShuffler.ResetGame();
             blockInput.Value = false;

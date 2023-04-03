@@ -18,6 +18,7 @@ MonoBehaviour:
   correctIndicator: {fileID: 6478475393454707216}
   wrongIndicator: {fileID: 5987342090796277887}
   draggedWashingStepReference: {fileID: 11400000, guid: 6cc150d83deca8f65a0ac82b7f444b2f, type: 2}
+  selectedWashingStepSlotReference: {fileID: 0}
 --- !u!1 &3582904688555372740
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,15 +396,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPointerExit
-      objectReference: {fileID: 0}
-    - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnPointerDown
       objectReference: {fileID: 0}
     - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-      propertyPath: m_Delegates.Array.data[3].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnPointerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+      propertyPath: m_Delegates.Array.data[3].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPointerExit
       objectReference: {fileID: 0}
     - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -411,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LavaUmaMao.WashingStepSlot, LavaUmaMao
+      value: LavaUmaMao.SelectionWashingStepSlot, LavaUmaMao
       objectReference: {fileID: 0}
     - target: {fileID: 6444082061621231449, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -443,35 +444,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
---- !u!1 &5987342090796277887 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8384258578401433261, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-  m_PrefabInstance: {fileID: 2832079348516501202}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6478475393454707216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9125904876620063938, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-  m_PrefabInstance: {fileID: 2832079348516501202}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1404421830036782721 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3760526713762531411, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-  m_PrefabInstance: {fileID: 2832079348516501202}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6489869352026436176 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9033434581133509762, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
-  m_PrefabInstance: {fileID: 2832079348516501202}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9056411809719584009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &9056411809719584009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6549157066818630619, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+--- !u!224 &1028674741416149978 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2957465361698354440, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
   m_PrefabInstance: {fileID: 2832079348516501202}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &29571532235542364 stripped
@@ -485,8 +460,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1028674741416149978 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2957465361698354440, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+--- !u!1 &9056411809719584009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6549157066818630619, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 2832079348516501202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6489869352026436176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9033434581133509762, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 2832079348516501202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056411809719584009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1404421830036782721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3760526713762531411, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 2832079348516501202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6478475393454707216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9125904876620063938, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
+  m_PrefabInstance: {fileID: 2832079348516501202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5987342090796277887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8384258578401433261, guid: e6085df9f0232f5f9bc52a06dd885f83, type: 3}
   m_PrefabInstance: {fileID: 2832079348516501202}
   m_PrefabAsset: {fileID: 0}

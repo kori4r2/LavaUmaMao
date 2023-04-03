@@ -10,6 +10,7 @@ namespace LavaUmaMao {
         [SerializeField] protected GameObject correctIndicator = null;
         [SerializeField] protected GameObject wrongIndicator = null;
         [SerializeField] protected WashingStepVariable draggedWashingStepReference = null;
+        [SerializeField] protected WashingStepSlotVariable selectedWashingStepSlotReference = null;
         public abstract WashingStep WashingStep { get; protected set; }
 
         protected abstract void WashingStepStateChanged(WashingStepState newState);
