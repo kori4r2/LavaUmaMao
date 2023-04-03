@@ -146,8 +146,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.LavaUmaMo
-    Standalone: com.DefaultCompany.LavaUmaMo
+    Android: com.DefaultCompany.LavaUmaMao
+    Standalone: com.DefaultCompany.LavaUmaMao
   buildNumber:
     Standalone: 0
     iPhone: 0

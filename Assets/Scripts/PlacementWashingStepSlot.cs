@@ -86,14 +86,14 @@ namespace LavaUmaMao {
 
         public override void OnPointerEnter() {
             base.OnPointerEnter();
-            Debug.Log($"Entered Placement Slot {transform.parent.name}");
+            CustomDebugger.Log($"Entered Placement Slot {transform.parent.name}");
             if (draggedWashingStepReference.Value != null)
                 newStepSelected = draggedWashingStepReference.Value;
         }
 
         public override void OnPointerExit() {
             base.OnPointerExit();
-            Debug.Log($"Exited Placement Slot {transform.parent.name}");
+            CustomDebugger.Log($"Exited Placement Slot {transform.parent.name}");
             newStepSelected = null;
         }
 

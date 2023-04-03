@@ -55,16 +55,16 @@ namespace LavaUmaMao {
 
         public override void OnPointerEnter() {
             base.OnPointerEnter();
-            Debug.Log($"Entered Selection Slot {transform.parent.name}");
+            CustomDebugger.Log($"Entered Selection Slot {transform.parent.name}");
         }
 
         public override void OnPointerExit() {
             base.OnPointerExit();
-            Debug.Log($"Exited Selection Slot {transform.parent.name}");
+            CustomDebugger.Log($"Exited Selection Slot {transform.parent.name}");
         }
 
         public override void OnPointerDown() {
-            Debug.Log($"Pointer down on selection slot {transform.parent.name}");
+            CustomDebugger.Log($"Pointer down on selection slot {transform.parent.name}");
             if (WashingStep.CurrentState != WashingStepState.Available)
                 return;
             draggedWashingStepReference.Value = WashingStep;
@@ -72,7 +72,7 @@ namespace LavaUmaMao {
         }
 
         public override void OnPointerUp() {
-            Debug.Log($"Pointer up on selection slot {transform.parent.name}");
+            CustomDebugger.Log($"Pointer up on selection slot {transform.parent.name}");
             if (draggedWashingStepReference.Value != WashingStep || draggedWashingStepReference.Value == null)
                 return;
             WashingStep.CurrentState = WashingStepState.Available;

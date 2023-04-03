@@ -19,7 +19,7 @@ namespace LavaUmaMao {
         }
 
         private void UpdateImage(WashingStep newValue) {
-            Debug.Log($"Dragged step changed, new value = {(newValue != null ? newValue.name : "null")}");
+            CustomDebugger.Log($"Dragged step changed, new value = {(newValue != null ? newValue.name : "null")}");
             image.sprite = newValue != null ? newValue.StepSprite : null;
             image.color = newValue != null ? Color.white : Color.clear;
         }
