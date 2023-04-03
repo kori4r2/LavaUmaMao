@@ -1,28 +1,14 @@
 using UnityEngine;
 using Toblerone.Toolbox;
+using System.Collections;
 
 namespace LavaUmaMao {
     public class PlacementWashingStepSlot : WashingStepSlot {
         [SerializeField] private IntVariable placedStepsCount;
         public override WashingStep WashingStep { get; protected set; }
-        private VariableObserver<WashingStep> draggedStepObserver;
-        private WashingStep newStepSelected = null;
-        private WashingStep previousStepSelected = null;
 
         private new void Awake() {
             base.Awake();
-            draggedStepObserver = new VariableObserver<WashingStep>(draggedWashingStepReference, DraggingStatusChanged);
-        }
-
-        private void DraggingStatusChanged(WashingStep draggedStepNewValue) {
-            if (draggedStepNewValue == null && newStepSelected != null) {
-                ChangeCurrentWashingStep(newStepSelected);
-                newStepSelected = null;
-                draggedWashingStepReference.Value = null;
-                WashingStep.CurrentState = WashingStepState.Selected;
-                placedStepsCount.IncrementValue(1);
-            }
-            newStepSelected = null;
         }
 
         public void ResetSlot() {
@@ -33,11 +19,8 @@ namespace LavaUmaMao {
         }
 
         private void ChangeCurrentWashingStep(WashingStep newStep) {
-            if (WashingStep == newStep && newStep != null)
-                return;
-            if (WashingStep != null) {
-                StepReplacementPrecautions(newStep);
-            }
+            if (WashingStep != null)
+                RemovePlacedStep();
             if (newStep != null)
                 newStep.AddStateChangeListener(WashingStepStateChanged);
             WashingStep = newStep;
@@ -45,11 +28,10 @@ namespace LavaUmaMao {
             slotImage.color = newStep != null ? Color.white : Color.clear;
         }
 
-        private void StepReplacementPrecautions(WashingStep newStep) {
+        private void RemovePlacedStep() {
             WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
             WashingStep.CurrentState = WashingStepState.Available;
-            if (newStep != null)
-                placedStepsCount.DecrementValue(1);
+            placedStepsCount.DecrementValue(1);
         }
 
         protected override void WashingStepStateChanged(WashingStepState newState) {
@@ -74,45 +56,47 @@ namespace LavaUmaMao {
             }
         }
 
-        private new void OnEnable() {
-            base.OnEnable();
-            draggedStepObserver.StartWatching();
-        }
-
-        private new void OnDisable() {
-            base.OnDisable();
-            draggedStepObserver.StopWatching();
+        public void PlaceDraggedStep() {
+            ChangeCurrentWashingStep(draggedWashingStepReference.Value);
+            draggedWashingStepReference.Value = null;
+            if (WashingStep != null) {
+                placedStepsCount.IncrementValue(1);
+                WashingStep.CurrentState = WashingStepState.Selected;
+            }
         }
 
         public override void OnPointerEnter() {
             base.OnPointerEnter();
-            CustomDebugger.Log($"Entered Placement Slot {transform.parent.name}");
-            if (draggedWashingStepReference.Value != null)
-                newStepSelected = draggedWashingStepReference.Value;
+            selectedWashingStepSlotReference.Value = this;
         }
 
         public override void OnPointerExit() {
             base.OnPointerExit();
-            CustomDebugger.Log($"Exited Placement Slot {transform.parent.name}");
-            newStepSelected = null;
+            StartCoroutine(PointerExitCoroutine());
+        }
+
+        private IEnumerator PointerExitCoroutine() {
+            yield return null;
+            if (draggedWashingStepReference.Value != null)
+                selectedWashingStepSlotReference.Value = null;
         }
 
         public override void OnPointerDown() {
             if (WashingStep == null || draggedWashingStepReference.Value != null)
                 return;
             draggedWashingStepReference.Value = WashingStep;
-            previousStepSelected = WashingStep;
             ChangeCurrentWashingStep(null);
-            placedStepsCount.DecrementValue(1);
             draggedWashingStepReference.Value.CurrentState = WashingStepState.Dragging;
-            newStepSelected = draggedWashingStepReference.Value;
         }
 
         public override void OnPointerUp() {
-            if (previousStepSelected != null)
-                previousStepSelected.CurrentState = WashingStepState.Available;
-            previousStepSelected = null;
-            draggedWashingStepReference.Value = null;
+            PlacementWashingStepSlot selectedSlot = selectedWashingStepSlotReference.Value as PlacementWashingStepSlot;
+            if (selectedSlot == null) {
+                draggedWashingStepReference.Value.CurrentState = WashingStepState.Available;
+                draggedWashingStepReference.Value = null;
+            } else {
+                selectedSlot.PlaceDraggedStep();
+            }
         }
     }
 }

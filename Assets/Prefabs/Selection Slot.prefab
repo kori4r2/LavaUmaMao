@@ -18,7 +18,7 @@ MonoBehaviour:
   correctIndicator: {fileID: 6478475393454707216}
   wrongIndicator: {fileID: 5987342090796277887}
   draggedWashingStepReference: {fileID: 11400000, guid: 6cc150d83deca8f65a0ac82b7f444b2f, type: 2}
-  selectedWashingStepSlotReference: {fileID: 0}
+  selectedWashingStepSlotReference: {fileID: 11400000, guid: 93032900b4e44a644b2fe8e2a5ee5f11, type: 2}
 --- !u!1 &3582904688555372740
 GameObject:
   m_ObjectHideFlags: 0

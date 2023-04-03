@@ -18,7 +18,7 @@ MonoBehaviour:
   correctIndicator: {fileID: 3530803025950787404}
   wrongIndicator: {fileID: 4179492488055747875}
   draggedWashingStepReference: {fileID: 11400000, guid: 6cc150d83deca8f65a0ac82b7f444b2f, type: 2}
-  selectedWashingStepSlotReference: {fileID: 0}
+  selectedWashingStepSlotReference: {fileID: 11400000, guid: 93032900b4e44a644b2fe8e2a5ee5f11, type: 2}
   placedStepsCount: {fileID: 11400000, guid: 320696c176a41a3a1b089e5609f15443, type: 2}
 --- !u!1001 &5645918023762731918
 PrefabInstance:

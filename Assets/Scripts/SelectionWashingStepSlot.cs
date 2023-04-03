@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace LavaUmaMao {
     public class SelectionWashingStepSlot : WashingStepSlot {
         private WashingStep startingWashingStep = null;
@@ -55,16 +53,10 @@ namespace LavaUmaMao {
 
         public override void OnPointerEnter() {
             base.OnPointerEnter();
-            CustomDebugger.Log($"Entered Selection Slot {transform.parent.name}");
-        }
-
-        public override void OnPointerExit() {
-            base.OnPointerExit();
-            CustomDebugger.Log($"Exited Selection Slot {transform.parent.name}");
+            selectedWashingStepSlotReference.Value = null;
         }
 
         public override void OnPointerDown() {
-            CustomDebugger.Log($"Pointer down on selection slot {transform.parent.name}");
             if (WashingStep.CurrentState != WashingStepState.Available)
                 return;
             draggedWashingStepReference.Value = WashingStep;
@@ -72,11 +64,15 @@ namespace LavaUmaMao {
         }
 
         public override void OnPointerUp() {
-            CustomDebugger.Log($"Pointer up on selection slot {transform.parent.name}");
             if (draggedWashingStepReference.Value != WashingStep || draggedWashingStepReference.Value == null)
                 return;
-            WashingStep.CurrentState = WashingStepState.Available;
-            draggedWashingStepReference.Value = null;
+            PlacementWashingStepSlot selectedSlot = selectedWashingStepSlotReference.Value as PlacementWashingStepSlot;
+            if (selectedSlot != null) {
+                selectedSlot.PlaceDraggedStep();
+            } else {
+                WashingStep.CurrentState = WashingStepState.Available;
+                draggedWashingStepReference.Value = null;
+            }
         }
     }
 }
