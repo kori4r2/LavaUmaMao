@@ -33,8 +33,8 @@ namespace LavaUmaMao {
         private void ResetGame() {
             selectedSlot.Value = null;
             draggedSlot.Value = null;
-            placedStepsCount.Value = 0;
             slotShuffler.ResetGame();
+            placedStepsCount.Value = 0;
             blockInput.Value = false;
         }
 
@@ -72,7 +72,6 @@ namespace LavaUmaMao {
         private IEnumerator WrongAnswerCoroutine() {
             yield return wrongAnswerDelay;
             int wrongSlotsCount = slotShuffler.ResetWrongSlots();
-            placedStepsCount.DecrementValue(wrongSlotsCount);
             blockInput.Value = false;
         }
     }
