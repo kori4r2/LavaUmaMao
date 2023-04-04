@@ -10,6 +10,7 @@ BUILD_DIR = $(CURDIR)/Build
 LINUX_BUILD_DIR = $(BUILD_DIR)/Linux
 WINDOWS_BUILD_DIR = $(BUILD_DIR)/Windows
 WEB_BUILD_DIR = $(BUILD_DIR)/Web
+ANDROID_BUILD_DIR = $(BUILD_DIR)/Android
 
 # Check that given variables are set and all have non-empty values,
 # die with an error otherwise.
@@ -25,7 +26,7 @@ __check_defined = \
     $(if $(value $1),, \
       $(error Undefined $1$(if $2, ($2))))
 
-all : --check_variables --linux --windows --webgl
+all : --check_variables --linux --windows --webgl --android
 
 --linux: --build_linux --zip_linux_build
 linux : --check_variables --linux
@@ -35,6 +36,9 @@ windows : --check_variables --windows
 
 --webgl : --build_web --zip_web_build
 webgl : --check_variables --webgl
+
+--android : --build_android --zip_android_build
+android : --check_variables --android
 
 --check_variables :
 	$(call check_defined, UNITY_EXECUTABLE, unity editor command or path to executable)
@@ -54,6 +58,9 @@ $(WINDOWS_BUILD_DIR): $(BUILD_DIR)
 
 $(WEB_BUILD_DIR): $(BUILD_DIR)
 	@mkdir -p $(WEB_BUILD_DIR)
+
+$(ANDROID_BUILD_DIR): $(BUILD_DIR)
+	@mkdir -p $(ANDROID_BUILD_DIR)
 
 --build_linux: $(LINUX_BUILD_DIR)
 	@echo -e "\n\n\t/-------------------\\"
@@ -80,9 +87,19 @@ $(WEB_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\t WebGL build started"
 	@echo -e "\t\\-------------------/\n\n"
 	@rm -rf $(WEB_BUILD_DIR)/*
-	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget WebGL -executeMethod LavaUmaMao.WebGLBuilder.Build $(WEB_BUILD_DIR)/
+	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget WebGL -executeMethod LavaUmaMao.Editor.CustomBuilders.BuildWebGL $(WEB_BUILD_DIR)/
 	@echo -e "\n\n\t/---------------------\\"
 	@echo -e "\t WebGL build finished!"
+	@echo -e "\t\\---------------------/\n\n"
+
+--build_android: $(ANDROID_BUILD_DIR)
+	@echo -e "\n\n\t/-------------------\\"
+	@echo -e "\t Android build started"
+	@echo -e "\t\\-------------------/\n\n"
+	@rm -rf $(ANDROID_BUILD_DIR)/*
+	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Android -executeMethod LavaUmaMao.Editor.CustomBuilders.BuildAndroid $(ANDROID_BUILD_DIR)/
+	@echo -e "\n\n\t/---------------------\\"
+	@echo -e "\t Android build finished!"
 	@echo -e "\t\\---------------------/\n\n"
 
 --zip_linux_build: $(LINUX_BUILD_DIR)
@@ -99,3 +116,8 @@ $(WEB_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\tcreating web build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Web.zip ...\n"
 	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Web.zip
 	@cd $(WEB_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Web.zip ./
+
+--zip_android_build: $(ANDROID_BUILD_DIR)
+	@echo -e "\tcreating android build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Android.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Android.zip
+	@cd $(ANDROID_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Android.zip ./
