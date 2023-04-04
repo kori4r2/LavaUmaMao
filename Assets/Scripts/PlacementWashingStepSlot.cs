@@ -91,11 +91,11 @@ namespace LavaUmaMao {
 
         public override void OnPointerUp() {
             PlacementWashingStepSlot selectedSlot = selectedWashingStepSlotReference.Value as PlacementWashingStepSlot;
-            if (selectedSlot == null) {
+            if (selectedSlot != null) {
+                selectedSlot.PlaceDraggedStep();
+            } else {
                 draggedWashingStepReference.Value.CurrentState = WashingStepState.Available;
                 draggedWashingStepReference.Value = null;
-            } else {
-                selectedSlot.PlaceDraggedStep();
             }
         }
     }

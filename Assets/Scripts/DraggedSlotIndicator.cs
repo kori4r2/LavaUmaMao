@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace LavaUmaMao {
     public class DraggedSlotIndicator : UIBehaviour {
-        [SerializeField]
-        private Image image = null;
+        [SerializeField] private Image image = null;
         [SerializeField] private WashingStepVariable draggedWashingStep;
         [SerializeField] private InputActionReference movePointerAction;
         private VariableObserver<WashingStep> draggedWashingStepObserver;
@@ -19,7 +18,6 @@ namespace LavaUmaMao {
         }
 
         private void UpdateImage(WashingStep newValue) {
-            CustomDebugger.Log($"Dragged step changed, new value = {(newValue != null ? newValue.name : "null")}");
             image.sprite = newValue != null ? newValue.StepSprite : null;
             image.color = newValue != null ? Color.white : Color.clear;
         }

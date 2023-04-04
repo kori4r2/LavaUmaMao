@@ -100,16 +100,13 @@ namespace LavaUmaMao {
             return result;
         }
 
-        public int ResetWrongSlots() {
-            int count = 0;
+        public void ResetWrongSlots() {
             for (int index = 0; index < stepNumber; index++) {
                 WashingStep placedStep = placementSlots[index].WashingStep;
                 if (placedStep.CurrentState == WashingStepState.Wrong) {
-                    count++;
                     placedStep.CurrentState = WashingStepState.Available;
                 }
             }
-            return count;
         }
     }
 }

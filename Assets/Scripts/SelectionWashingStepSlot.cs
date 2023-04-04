@@ -6,6 +6,24 @@ namespace LavaUmaMao {
             protected set { }
         }
 
+        public void ResetInitialWashingStep(WashingStep newInitialStep) {
+            if (newInitialStep == null)
+                return;
+
+            UpdateStateChangeCallbacks(newInitialStep);
+            startingWashingStep = newInitialStep;
+            if (slotImage.sprite != WashingStep.StepSprite)
+                slotImage.sprite = WashingStep.StepSprite;
+            WashingStepStateChanged(WashingStep.CurrentState);
+        }
+
+        private void UpdateStateChangeCallbacks(WashingStep newInitialStep) {
+            if (WashingStep != null && newInitialStep != WashingStep)
+                WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
+            if (newInitialStep != WashingStep)
+                newInitialStep.AddStateChangeListener(WashingStepStateChanged);
+        }
+
         protected override void WashingStepStateChanged(WashingStepState newState) {
             switch (newState) {
                 case WashingStepState.Available:
@@ -34,21 +52,6 @@ namespace LavaUmaMao {
 
         public void PlayAnimation() {
             WashingStep.PlayAnimation();
-        }
-
-        public void ResetInitialWashingStep(WashingStep newInitialStep) {
-            if (newInitialStep == null)
-                return;
-
-            if (WashingStep != null && newInitialStep != WashingStep)
-                WashingStep.RemoveStateChangeListener(WashingStepStateChanged);
-            if (newInitialStep != WashingStep)
-                newInitialStep.AddStateChangeListener(WashingStepStateChanged);
-
-            startingWashingStep = newInitialStep;
-            if (slotImage.sprite != WashingStep.StepSprite)
-                slotImage.sprite = WashingStep.StepSprite;
-            WashingStepStateChanged(WashingStep.CurrentState);
         }
 
         public override void OnPointerEnter() {

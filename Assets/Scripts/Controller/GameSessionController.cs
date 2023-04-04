@@ -71,7 +71,7 @@ namespace LavaUmaMao {
 
         private IEnumerator WrongAnswerCoroutine() {
             yield return wrongAnswerDelay;
-            int wrongSlotsCount = slotShuffler.ResetWrongSlots();
+            slotShuffler.ResetWrongSlots();
             blockInput.Value = false;
         }
     }
