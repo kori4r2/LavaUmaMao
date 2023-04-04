@@ -103,21 +103,21 @@ $(ANDROID_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\t\\---------------------/\n\n"
 
 --zip_linux_build: $(LINUX_BUILD_DIR)
-	@echo -e "\tcreating linux build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Linux.zip ...\n"
-	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Linux.zip
-	@cd $(LINUX_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Linux.zip ./
+	@echo -e "\tcreating linux build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Linux.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Linux.zip
+	@cd $(LINUX_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Linux.zip ./
 
 --zip_windows_build: $(WINDOWS_BUILD_DIR)
-	@echo -e "\tcreating windows build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Windows.zip ...\n"
-	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Windows.zip
-	@cd $(WINDOWS_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Windows.zip ./
+	@echo -e "\tcreating windows build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Windows.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Windows.zip
+	@cd $(WINDOWS_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Windows.zip ./
 
 --zip_web_build: $(WEB_BUILD_DIR)
-	@echo -e "\tcreating web build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Web.zip ...\n"
-	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Web.zip
-	@cd $(WEB_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Web.zip ./
+	@echo -e "\tcreating web build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Web.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Web.zip
+	@cd $(WEB_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Web.zip ./
 
 --zip_android_build: $(ANDROID_BUILD_DIR)
-	@echo -e "\tcreating android build zip file at $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Android.zip ...\n"
-	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)$(VERSION)_Android.zip
-	@cd $(ANDROID_BUILD_DIR) && zip -r ../$(PROJECT_NAME)$(VERSION)_Android.zip ./
+	@echo -e "\tcreating android build zip file at $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Android.zip ...\n"
+	@rm -f $(BUILD_DIR)/$(PROJECT_NAME)_$(VERSION)_Android.zip
+	@cd $(ANDROID_BUILD_DIR) && zip -r ../$(PROJECT_NAME)_$(VERSION)_Android.zip ./
