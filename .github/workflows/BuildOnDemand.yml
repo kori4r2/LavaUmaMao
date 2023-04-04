@@ -149,3 +149,53 @@ jobs:
         with:
           name: ${{ env.WEB_BUILD_NAME }}
           path: ./Build/${{ env.WEB_BUILD_NAME }}
+
+  build-and-upload-android:
+    if: |
+      (github.event.inputs.targets == '' ||
+      github.event.inputs.targets == 'all' ||
+      contains(github.event.inputs.targets, 'android'))
+    name: Generate And Upload Android Build Files
+    runs-on: ubuntu-latest
+    container: unityci/editor:ubuntu-2020.3.11f1-android-0.15.0
+    env:
+      DOTNET_ROOT: "/opt/unity/Editor/Data/NetCore/Sdk-2.2.107"
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt update && apt install sudo
+          sudo apt-get install -y zip
+          sudo apt-get install -y make
+
+      - name: Activate unity
+        # exit code is 1 for manual activation
+        continue-on-error: true
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          echo "$UNITY_LICENSE" | tr -d '\r' > UnityLicenseFile.ulf
+          unity-editor -nographics -logFile /dev/stdout -manualLicenseFile UnityLicenseFile.ulf -quit | echo "Activation finished"
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache Library
+        id: cache-library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-2020.3.11-android
+
+      - name: Generate Build
+        run: |
+          make android UNITY_EXECUTABLE=unity-editor
+          export ANDROID_BUILD_PATH=$(ls Build/Android/*.apk | sed -e 's/Build\///')
+          echo "ANDROID_BUILD_PATH=$ANDROID_BUILD_PATH" >> $GITHUB_ENV
+          export ANDROID_BUILD_FILENAME=$(ls Build/Android/*.apk | sed -e 's/Build\/Android\///')
+          echo "ANDROID_BUILD_FILENAME=$ANDROID_BUILD_FILENAME" >> $GITHUB_ENV
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ANDROID_BUILD_FILENAME }}
+          path: ./Build/${{ env.ANDROID_BUILD_PATH }}

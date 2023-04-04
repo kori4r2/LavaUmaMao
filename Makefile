@@ -97,7 +97,7 @@ $(ANDROID_BUILD_DIR): $(BUILD_DIR)
 	@echo -e "\t Android build started"
 	@echo -e "\t\\-------------------/\n\n"
 	@rm -rf $(ANDROID_BUILD_DIR)/*
-	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Android -executeMethod LavaUmaMao.Editor.CustomBuilders.BuildAndroid $(ANDROID_BUILD_DIR)/
+	@$(UNITY_EXECUTABLE) -quit -projectPath $(CURDIR) -batchmode -nographics -buildTarget Android -executeMethod LavaUmaMao.Editor.CustomBuilders.BuildAndroid $(ANDROID_BUILD_DIR)/$(PROJECT_NAME).apk
 	@echo -e "\n\n\t/---------------------\\"
 	@echo -e "\t Android build finished!"
 	@echo -e "\t\\---------------------/\n\n"
